@@ -8,11 +8,13 @@ class AdItem {
   final String title;
   final String subtitle;
   final String imagePath;
+  final String date;
 
   const AdItem({
     required this.title,
     required this.subtitle,
     required this.imagePath,
+    required this.date,
   });
 }
 
@@ -47,6 +49,14 @@ class _SectionHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
+        Text(
+          title,
+          style: AppTextStyles.regular16.copyWith(
+            fontSize: 17.sp,
+            color: const Color(0xFF2F3654),
+          ),
+        ),
+        const Spacer(),
         Row(
           children: List.generate(
             5,
@@ -59,14 +69,6 @@ class _SectionHeader extends StatelessWidget {
                 shape: BoxShape.circle,
               ),
             ),
-          ),
-        ),
-        const Spacer(),
-        Text(
-          title,
-          style: AppTextStyles.regular16.copyWith(
-            fontSize: 17.sp,
-            color: const Color(0xFF2F3654),
           ),
         ),
       ],
@@ -82,6 +84,7 @@ class _AdCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppCard(
+      elevation: 0,
       margin: EdgeInsets.zero,
       padding: EdgeInsets.zero,
       borderRadius: 8.r,
@@ -92,22 +95,38 @@ class _AdCard extends StatelessWidget {
           border: Border.all(color: const Color(0xFFE6E6E6)),
         ),
         child: Padding(
-          padding: EdgeInsets.all(12.w),
+          padding: EdgeInsets.all(0.w),
           child: Row(
             children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(4.r),
+                child: Image.asset(
+                  item.imagePath,
+                  width: 120.w,
+                  height: 100.h,
+                  fit: BoxFit.cover,
+                  errorBuilder: (_, __, ___) => Container(
+                    width: 120.w,
+                    height: 82.h,
+                    color: const Color(0xFFEAEAEA),
+                  ),
+                ),
+              ),
+              SizedBox(width: 12.w),
+
               Expanded(
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Text(
                       item.title,
                       textAlign: TextAlign.right,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
-                      style: AppTextStyles.regular16.copyWith(
-                        fontSize: 15.sp,
-                        color: const Color(0xFF2F3654),
+                      style: AppTextStyles.semiBold14.copyWith(
+                        fontSize: 13.sp,
+                        color: AppColors.textPrimary,
                         height: 1.45,
                       ),
                     ),
@@ -117,28 +136,24 @@ class _AdCard extends StatelessWidget {
                       textAlign: TextAlign.right,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
-                      style: AppTextStyles.regular14.copyWith(
-                        fontSize: 13.sp,
+                      style: AppTextStyles.regular12.copyWith(
+                        fontSize: 10.sp,
                         color: const Color(0xFF8E8E8E),
                         height: 1.45,
                       ),
                     ),
+                    SizedBox(height: 8.h),
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: Text(
+                        item.date,
+                        style: AppTextStyles.regular12.copyWith(
+                          fontSize: 11.sp,
+                          color: AppColors.primary,
+                        ),
+                      ),
+                    ),
                   ],
-                ),
-              ),
-              SizedBox(width: 12.w),
-              ClipRRect(
-                borderRadius: BorderRadius.circular(6.r),
-                child: Image.asset(
-                  item.imagePath,
-                  width: 120.w,
-                  height: 82.h,
-                  fit: BoxFit.cover,
-                  errorBuilder: (_, __, ___) => Container(
-                    width: 120.w,
-                    height: 82.h,
-                    color: const Color(0xFFEAEAEA),
-                  ),
                 ),
               ),
             ],

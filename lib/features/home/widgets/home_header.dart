@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_application_1/core/theme/app_colors.dart';
 import 'package:flutter_application_1/core/theme/app_text_styles.dart';
+import 'package:flutter_svg/svg.dart';
 
 class HomeHeader extends StatelessWidget {
   final bool isGuest;
@@ -43,8 +44,6 @@ class HomeHeader extends StatelessWidget {
             child: Column(
               children: [
                 SizedBox(height: 60.h),
-
-                // العنوان + أيقونة المنيو
                 Row(
                   children: [
                     InkWell(
@@ -52,10 +51,14 @@ class HomeHeader extends StatelessWidget {
                       borderRadius: BorderRadius.circular(8.r),
                       child: Padding(
                         padding: EdgeInsets.all(4.w),
-                        child: Icon(
-                          Icons.grid_view_rounded,
-                          color: AppColors.white,
-                          size: 25.sp,
+                        child: SvgPicture.asset(
+                          'assets/images/menu.svg',
+                          width: 24.w,
+                          height: 24.h,
+                          colorFilter: const ColorFilter.mode(
+                            Colors.white,
+                            BlendMode.srcIn,
+                          ),
                         ),
                       ),
                     ),
@@ -71,9 +74,7 @@ class HomeHeader extends StatelessWidget {
                     SizedBox(width: 24.w),
                   ],
                 ),
-
                 SizedBox(height: 53.h),
-
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 20.w),
                   child: Column(
@@ -101,8 +102,7 @@ class HomeHeader extends StatelessWidget {
                               fontSize: 14.sp,
                             ),
                           ),
-                          Spacer(),
-
+                          const Spacer(),
                           TextButton.icon(
                             onPressed: () {},
                             style: TextButton.styleFrom(

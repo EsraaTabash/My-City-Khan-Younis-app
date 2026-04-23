@@ -27,7 +27,7 @@ class NewsSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        _SectionHeader(title: 'آخر الأخبار'),
+        const _SectionHeader(title: 'آخر الأخبار'),
         SizedBox(height: 8.h),
         ...items.map(
           (item) => Padding(
@@ -49,6 +49,15 @@ class _SectionHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
+        Text(
+          title,
+          style: AppTextStyles.regular16.copyWith(
+            fontSize: 16.sp,
+            color: const Color(0xFF2F3654),
+          ),
+        ),
+        const Spacer(),
+
         Row(
           children: List.generate(
             5,
@@ -61,14 +70,6 @@ class _SectionHeader extends StatelessWidget {
                 shape: BoxShape.circle,
               ),
             ),
-          ),
-        ),
-        const Spacer(),
-        Text(
-          title,
-          style: AppTextStyles.regular16.copyWith(
-            fontSize: 17.sp,
-            color: const Color(0xFF2F3654),
           ),
         ),
       ],
@@ -84,6 +85,7 @@ class _NewsCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppCard(
+      elevation: 0,
       margin: EdgeInsets.zero,
       padding: EdgeInsets.zero,
       borderRadius: 8.r,
@@ -100,48 +102,35 @@ class _NewsCard extends StatelessWidget {
               borderRadius: BorderRadius.vertical(top: Radius.circular(8.r)),
               child: Image.asset(
                 item.imagePath,
-                height: 170.h,
+                height: 155.h,
                 width: double.infinity,
                 fit: BoxFit.cover,
-                errorBuilder: (_, __, ___) =>
-                    Container(height: 170.h, color: const Color(0xFFEAEAEA)),
+                errorBuilder: (_, __, ___) => Container(
+                  height: 155.h,
+                  color: const Color(0xFFEAEAEA),
+                  alignment: Alignment.center,
+                  child: const Icon(Icons.image_not_supported_outlined),
+                ),
               ),
             ),
+            SizedBox(height: 9.h),
+
             Padding(
-              padding: EdgeInsets.fromLTRB(14.w, 12.h, 14.w, 14.h),
+              padding: EdgeInsets.fromLTRB(12.w, 10.h, 12.w, 12.h),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Text(
-                    item.title,
-                    textAlign: TextAlign.right,
-                    style: AppTextStyles.regular16.copyWith(
-                      fontSize: 16.sp,
-                      color: const Color(0xFF2F3654),
-                      height: 1.45,
-                    ),
-                  ),
-                  SizedBox(height: 10.h),
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      item.date,
-                      style: AppTextStyles.bold14.copyWith(
-                        fontSize: 14.sp,
-                        color: AppColors.primary,
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 10.h),
+                  _TitleAndDate(item: item),
+                  SizedBox(height: 15.h),
                   Text(
                     item.description,
                     textAlign: TextAlign.right,
                     maxLines: 3,
                     overflow: TextOverflow.ellipsis,
                     style: AppTextStyles.regular14.copyWith(
-                      fontSize: 13.sp,
-                      color: const Color(0xFF9A9A9A),
-                      height: 1.6,
+                      fontSize: 10.sp,
+                      color: const Color(0xFF8F8F8F),
+                      height: 1.4,
                     ),
                   ),
                 ],
@@ -150,6 +139,49 @@ class _NewsCard extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class _TitleAndDate extends StatelessWidget {
+  final NewsItem item;
+
+  const _TitleAndDate({required this.item});
+
+  @override
+  Widget build(BuildContext context) {
+    final titleStyle = AppTextStyles.semiBold14.copyWith(
+      fontSize: 15.sp,
+      color: const Color(0xFF2F3654),
+      height: 1.3,
+    );
+
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.end,
+      children: [
+        Expanded(
+          child: Text(
+            item.title,
+            textAlign: TextAlign.right,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+            style: titleStyle,
+          ),
+        ),
+
+        SizedBox(width: 8.w),
+
+        Padding(
+          padding: EdgeInsets.only(bottom: 2.h),
+          child: Text(
+            item.date,
+            style: AppTextStyles.regular14.copyWith(
+              color: AppColors.primary,
+              fontSize: 12.sp,
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

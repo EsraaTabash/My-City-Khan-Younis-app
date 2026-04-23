@@ -11,6 +11,7 @@ class AppCard extends StatelessWidget {
   final EdgeInsetsGeometry? margin;
   final EdgeInsetsGeometry? padding;
   final double? borderRadius;
+  final double? elevation; // ✅ جديد
 
   const AppCard({
     super.key,
@@ -22,6 +23,7 @@ class AppCard extends StatelessWidget {
     this.margin,
     this.padding,
     this.borderRadius,
+    this.elevation,
   });
 
   @override
@@ -38,8 +40,8 @@ class AppCard extends StatelessWidget {
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.08),
-            blurRadius: 20,
-            offset: const Offset(0, 10),
+            blurRadius: elevation ?? 20,
+            offset: Offset(0, (elevation ?? 20) / 2),
           ),
         ],
       ),

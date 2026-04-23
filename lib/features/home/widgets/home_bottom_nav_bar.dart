@@ -1,70 +1,84 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_application_1/core/theme/app_colors.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_application_1/core/theme/app_text_styles.dart';
 
 class HomeBottomNavBar extends StatelessWidget {
-  final int selectedIndex;
-  final ValueChanged<int> onTap;
-
   const HomeBottomNavBar({
     super.key,
-    required this.selectedIndex,
+    required this.currentIndex,
     required this.onTap,
   });
 
+  final int currentIndex;
+  final ValueChanged<int> onTap;
+
   @override
   Widget build(BuildContext context) {
-    const items = [
-      _BottomNavItemData(label: 'الرئيسية', icon: Icons.home_outlined),
-      _BottomNavItemData(label: 'استكشاف', icon: Icons.location_on_outlined),
-      _BottomNavItemData(label: 'إعلانات', icon: Icons.campaign_outlined),
-      _BottomNavItemData(label: 'بلديتي', icon: Icons.apartment_outlined),
-      _BottomNavItemData(label: 'الحساب', icon: Icons.person_outline),
+    const items = <_BottomNavItem>[
+      _BottomNavItem(label: 'الرئيسية', iconPath: 'assets/images/home.svg'),
+      _BottomNavItem(label: 'استكشاف', iconPath: 'assets/images/explore.svg'),
+      _BottomNavItem(label: 'إعلانات', iconPath: 'assets/images/ads.svg'),
+      _BottomNavItem(label: 'بلديتي', iconPath: 'assets/images/my.svg'),
+      _BottomNavItem(label: 'الحساب', iconPath: 'assets/images/account.svg'),
     ];
 
     return Container(
-      decoration: const BoxDecoration(
-        color: AppColors.white,
+      height: 90.h,
+      padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.vertical(top: Radius.circular(18.r)),
         boxShadow: [
           BoxShadow(
-            color: Color(0x11000000),
-            blurRadius: 10,
-            offset: Offset(0, -2),
+            color: Colors.black.withOpacity(0.06),
+            blurRadius: 16,
+            offset: const Offset(0, -3),
           ),
         ],
       ),
-      padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 6.h),
       child: Row(
         children: List.generate(items.length, (index) {
-          final item = items[index];
-          final isSelected = selectedIndex == index;
+          final isSelected = currentIndex == index;
+
           return Expanded(
             child: InkWell(
               onTap: () => onTap(index),
-              child: Padding(
-                padding: EdgeInsets.symmetric(vertical: 4.h),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(
-                      item.icon,
-                      size: 22.sp,
+              borderRadius: BorderRadius.circular(14.r),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Container(
+                    padding: EdgeInsets.all(8.w),
+                    decoration: BoxDecoration(
                       color: isSelected
-                          ? AppColors.primary
-                          : AppColors.textPrimary,
+                          ? const Color(0xFF1295F3)
+                          : Colors.transparent,
+                      borderRadius: BorderRadius.circular(12.r),
                     ),
-                    SizedBox(height: 2.h),
-                    Text(
-                      item.label,
-                      style: AppTextStyles.regular14.copyWith(
-                        color: isSelected
-                            ? AppColors.primary
-                            : AppColors.textPrimary,
+                    child: SvgPicture.asset(
+                      items[index].iconPath,
+                      width: 22.w,
+                      height: 22.h,
+                      colorFilter: ColorFilter.mode(
+                        isSelected ? Colors.white : const Color(0xFF5E6278),
+                        BlendMode.srcIn,
                       ),
                     ),
-                  ],
-                ),
+                  ),
+
+                  SizedBox(height: 6.h),
+
+                  Text(
+                    items[index].label,
+                    style: AppTextStyles.medium14.copyWith(
+                      fontSize: 12.sp,
+                      color: isSelected
+                          ? const Color(0xFF1295F3)
+                          : const Color(0xFF5E6278),
+                    ),
+                  ),
+                ],
               ),
             ),
           );
@@ -74,9 +88,9 @@ class HomeBottomNavBar extends StatelessWidget {
   }
 }
 
-class _BottomNavItemData {
-  final String label;
-  final IconData icon;
+class _BottomNavItem {
+  const _BottomNavItem({required this.label, required this.iconPath});
 
-  const _BottomNavItemData({required this.label, required this.icon});
+  final String label;
+  final String iconPath;
 }

@@ -48,23 +48,19 @@ class _LoginScreenState extends State<LoginScreen> {
       backgroundColor: const Color(0xFFF8FAFC),
       body: Stack(
         children: [
-          // Bottom base layer
           Column(
             children: [
-              // Top gradient image section
               SizedBox(
                 height: topSectionHeight.h,
                 width: double.infinity,
                 child: Stack(
                   fit: StackFit.expand,
                   children: [
-                    // Background image
                     Image.asset(
                       'assets/images/login_bg.png',
                       fit: BoxFit.cover,
                     ),
 
-                    // Gradient overlay above the image
                     Container(
                       decoration: BoxDecoration(
                         gradient: LinearGradient(
@@ -78,7 +74,6 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
 
-                    // Welcome text inside top section
                     SafeArea(
                       child: Align(
                         alignment: Alignment.topCenter,
@@ -97,7 +92,6 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
 
-              // Bottom white section
               Expanded(
                 child: Container(
                   width: double.infinity,
@@ -107,7 +101,6 @@ class _LoginScreenState extends State<LoginScreen> {
             ],
           ),
 
-          // Card layer
           Positioned(
             top: cardTop.h,
             left: 0,
@@ -119,7 +112,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     key: _formKey,
                     child: Column(
                       children: [
-                        // Title with stars background image
                         Container(
                           width: double.infinity,
                           height: 64.h,
@@ -144,7 +136,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
                         SizedBox(height: 45.h),
 
-                        // National ID field
                         CustomTextField(
                           controller: _idController,
                           label: 'رقم الهوية',
@@ -156,7 +147,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
                         SizedBox(height: 18.h),
 
-                        // Password field
                         CustomTextField(
                           controller: _passwordController,
                           label: 'كلمة المرور',
@@ -168,7 +158,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
                         SizedBox(height: 20.h),
 
-                        // Bottom links
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [

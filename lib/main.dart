@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/routes/app_pages.dart';
+import 'package:flutter_application_1/routes/app_routes.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_application_1/features/splash/splash_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,9 +17,10 @@ class MyApp extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (context, child) {
-        return const MaterialApp(
+        return MaterialApp(
           debugShowCheckedModeBanner: false,
-          home: SplashScreen(),
+          initialRoute: AppRoutes.splash,
+          onGenerateRoute: AppPages.onGenerateRoute,
         );
       },
     );

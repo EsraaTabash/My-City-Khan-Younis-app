@@ -21,9 +21,10 @@ class HomeData {
 
   static const List<AdItem> ads = [
     AdItem(
-      title: 'إعلان توريد أجهزة تكييف و تبريد',
-      subtitle: 'لقسم الصيانة و الدعم الفني',
+      title: 'إعلان توريد أجهزة تكييف و تبريد لقسم الصيانة و الدعم الفني',
+      subtitle: 'قسم المشتريات',
       imagePath: 'assets/images/ads_bg.png',
+      date: '18-2-2019',
     ),
   ];
 }
