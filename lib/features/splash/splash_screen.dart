@@ -52,10 +52,7 @@ class SplashScreen extends StatelessWidget {
                   PrimaryButton(
                     text: 'تسجيل الدخول',
                     onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (_) => const LoginScreen()),
-                      );
+                      Navigator.pushNamed(context, '/login');
                     },
                     height: 50,
                     borderRadius: 6,
@@ -64,11 +61,10 @@ class SplashScreen extends StatelessWidget {
                   SecondaryButton(
                     text: 'تجاهل و استمرار',
                     onPressed: () {
-                      Navigator.pushReplacement(
+                      Navigator.pushReplacementNamed(
                         context,
-                        MaterialPageRoute(
-                          builder: (_) => const HomeScreen(isGuest: true),
-                        ),
+                        '/home',
+                        arguments: true,
                       );
                     },
                     height: 50,

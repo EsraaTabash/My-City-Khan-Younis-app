@@ -152,13 +152,14 @@ class MenuScreen extends StatelessWidget {
                     iconPath: item.iconPath,
                     badgeCount: item.badgeCount,
                     onTap: () {
-                      Navigator.of(context).pop();
+                      final navigator = Navigator.of(context);
+
+                      navigator.pop();
 
                       if (item.route != null) {
-                        Navigator.pushNamed(
-                          context,
-                          item.route ?? AppRoutes.home,
-                        );
+                        Future.delayed(const Duration(milliseconds: 200), () {
+                          navigator.pushNamed(item.route!);
+                        });
                       }
                     },
                   );

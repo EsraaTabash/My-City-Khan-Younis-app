@@ -35,10 +35,7 @@ class _LoginScreenState extends State<LoginScreen> {
     FocusScope.of(context).unfocus();
 
     if (_formKey.currentState!.validate()) {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (_) => const HomeScreen(isGuest: false)),
-      );
+      Navigator.pushReplacementNamed(context, '/home', arguments: false);
     }
   }
 
