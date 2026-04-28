@@ -7,6 +7,7 @@ import 'package:flutter_application_1/features/home/widgets/home_bottom_nav_bar.
 import 'package:flutter_application_1/features/home/widgets/home_header.dart';
 import 'package:flutter_application_1/features/home/widgets/news_section.dart';
 import 'package:flutter_application_1/features/menu/menu_screen.dart';
+import 'package:flutter_application_1/features/discover/discover_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   final bool isGuest;
@@ -21,6 +22,63 @@ class _HomeScreenState extends State<HomeScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   int _selectedIndex = 0;
 
+  Widget _buildHomeContent() {
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          HomeHeader(
+            isGuest: widget.isGuest,
+            onMenuPressed: () {
+              _scaffoldKey.currentState?.openDrawer();
+            },
+          ),
+          Transform.translate(
+            offset: Offset(0, -50.h),
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.w),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  HomeTopCard(isGuest: widget.isGuest, stats: HomeData.stats),
+                  SizedBox(height: 26.h),
+                  NewsSection(items: HomeData.news),
+                  SizedBox(height: 20.h),
+                  AdsSection(items: HomeData.ads),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildCurrentPage() {
+    switch (_selectedIndex) {
+      case 0:
+        return _buildHomeContent();
+      case 1:
+        return DiscoverScreen(
+          onMenuTap: () {
+            _scaffoldKey.currentState?.openDrawer();
+          },
+          onBackTap: () {
+            setState(() {
+              _selectedIndex = 0;
+            });
+          },
+        );
+      case 2:
+        return const Center(child: Text('إعلانات'));
+      case 3:
+        return const Center(child: Text('بلديتي'));
+      case 4:
+        return const Center(child: Text('الحساب'));
+      default:
+        return _buildHomeContent();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Directionality(
@@ -33,39 +91,7 @@ class _HomeScreenState extends State<HomeScreen> {
           bottom: false,
           child: Column(
             children: [
-              Expanded(
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      HomeHeader(
-                        isGuest: widget.isGuest,
-                        onMenuPressed: () {
-                          _scaffoldKey.currentState?.openDrawer();
-                        },
-                      ),
-                      Transform.translate(
-                        offset: Offset(0, -50.h),
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 20.w),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: [
-                              HomeTopCard(
-                                isGuest: widget.isGuest,
-                                stats: HomeData.stats,
-                              ),
-                              SizedBox(height: 26.h),
-                              NewsSection(items: HomeData.news),
-                              SizedBox(height: 20.h),
-                              AdsSection(items: HomeData.ads),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+              Expanded(child: _buildCurrentPage()),
               HomeBottomNavBar(
                 currentIndex: _selectedIndex,
                 onTap: (index) {

@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:flutter_application_1/core/theme/app_colors.dart';
 import 'package:flutter_application_1/core/theme/app_text_styles.dart';
-import 'package:flutter_svg/svg.dart';
 
-class EOrdersHeader extends StatelessWidget {
+class AppHeader extends StatelessWidget {
   final String title;
-  final VoidCallback onBackTap;
+  final VoidCallback? onBackTap;
+  final VoidCallback? onMenuTap;
 
-  const EOrdersHeader({
+  const AppHeader({
     super.key,
     required this.title,
-    required this.onBackTap,
+    this.onBackTap,
+    this.onMenuTap,
   });
 
   @override
@@ -27,6 +29,7 @@ class EOrdersHeader extends StatelessWidget {
             fit: BoxFit.cover,
             errorBuilder: (_, __, ___) => Container(color: AppColors.primary),
           ),
+
           Container(
             decoration: BoxDecoration(
               gradient: LinearGradient(
@@ -39,6 +42,7 @@ class EOrdersHeader extends StatelessWidget {
               ),
             ),
           ),
+
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 14.w),
             child: Stack(
@@ -54,17 +58,41 @@ class EOrdersHeader extends StatelessWidget {
                     ),
                   ),
                 ),
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: InkWell(
-                    onTap: onBackTap,
-                    child: Icon(
-                      Icons.arrow_back_rounded,
-                      color: Colors.white,
-                      size: 24.sp,
+
+                if (onBackTap != null || onMenuTap != null)
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: Row(
+                      textDirection: TextDirection.rtl,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        if (onBackTap != null)
+                          InkWell(
+                            onTap: onBackTap,
+                            child: Icon(
+                              Icons.arrow_back_rounded,
+                              color: Colors.white,
+                              size: 24.sp,
+                            ),
+                          ),
+                        if (onMenuTap != null && onBackTap != null)
+                          SizedBox(width: 16.w),
+                        if (onMenuTap != null)
+                          InkWell(
+                            onTap: onMenuTap,
+                            child: SvgPicture.asset(
+                              'assets/images/menu.svg',
+                              width: 24.w,
+                              height: 24.h,
+                              colorFilter: const ColorFilter.mode(
+                                Colors.white,
+                                BlendMode.srcIn,
+                              ),
+                            ),
+                          ),
+                      ],
                     ),
                   ),
-                ),
               ],
             ),
           ),

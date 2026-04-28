@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/core/widgets/app_header.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_application_1/core/theme/app_colors.dart';
 import 'package:flutter_application_1/core/theme/app_text_styles.dart';
-import 'package:flutter_application_1/features/e_orders/widgets/e_orders_header.dart';
 
 class NewOrderScreen extends StatelessWidget {
   const NewOrderScreen({super.key});
@@ -17,7 +17,7 @@ class NewOrderScreen extends StatelessWidget {
           bottom: false,
           child: Column(
             children: [
-              EOrdersHeader(
+              AppHeader(
                 title: 'طلب جديد',
                 onBackTap: () => Navigator.of(context).pop(),
               ),
