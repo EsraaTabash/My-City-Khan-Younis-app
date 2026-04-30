@@ -4,6 +4,8 @@ import 'package:flutter_application_1/features/e_orders/screens/e_orders_screen.
 import 'package:flutter_application_1/features/e_orders/screens/new_order_screen.dart';
 import 'package:flutter_application_1/features/home/home_screen.dart';
 import 'package:flutter_application_1/features/splash/splash_screen.dart';
+import 'package:flutter_application_1/features/water_table/screens/water_table_screen.dart';
+import 'package:flutter_application_1/features/water_table/screens/water_table_detail_screen.dart';
 import 'package:flutter_application_1/routes/app_routes.dart';
 
 class AppPages {
@@ -25,6 +27,16 @@ class AppPages {
 
       case AppRoutes.newOrder:
         return MaterialPageRoute(builder: (_) => const NewOrderScreen());
+
+      case AppRoutes.waterTable:
+        return MaterialPageRoute(builder: (_) => const WaterTableScreen());
+
+      case '/water-table-detail':
+        final region = settings.arguments as Map<String, dynamic>?;
+        return MaterialPageRoute(
+          builder: (_) => WaterTableDetailScreen(region: region ?? {}),
+        );
+
       default:
         return MaterialPageRoute(
           builder: (_) =>
