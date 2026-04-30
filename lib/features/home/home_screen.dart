@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/features/account/account_screen.dart';
+import 'package:flutter_application_1/features/ads/ads_screen.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_application_1/features/home/data/home_data.dart';
 import 'package:flutter_application_1/features/home/widgets/HomeTopCard.dart';
@@ -8,6 +10,7 @@ import 'package:flutter_application_1/features/home/widgets/home_header.dart';
 import 'package:flutter_application_1/features/home/widgets/news_section.dart';
 import 'package:flutter_application_1/features/menu/menu_screen.dart';
 import 'package:flutter_application_1/features/discover/discover_screen.dart';
+import 'package:flutter_application_1/features/baladiyati/screens/baladiyati_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   final bool isGuest;
@@ -69,11 +72,23 @@ class _HomeScreenState extends State<HomeScreen> {
           },
         );
       case 2:
-        return const Center(child: Text('إعلانات'));
+        return AdsScreen(
+          onMenuTap: () {
+            _scaffoldKey.currentState?.openDrawer();
+          },
+        );
       case 3:
-        return const Center(child: Text('بلديتي'));
+        return BaladiyatiScreen(
+          onMenuTap: () {
+            _scaffoldKey.currentState?.openDrawer();
+          },
+        );
       case 4:
-        return const Center(child: Text('الحساب'));
+        return AccountScreen(
+          onMenuTap: () {
+            _scaffoldKey.currentState?.openDrawer();
+          },
+        );
       default:
         return _buildHomeContent();
     }
