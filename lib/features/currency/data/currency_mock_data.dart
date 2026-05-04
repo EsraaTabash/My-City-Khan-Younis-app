@@ -1,4 +1,4 @@
-import 'currency_item.dart';
+import 'package:flutter_application_1/features/currency/models/currency_item.dart';
 
 class CurrencyMockData {
   static const List<CurrencyItem> currencies = [

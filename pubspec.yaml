@@ -17,6 +17,7 @@ dependencies:
   geolocator: ^13.0.1
   http: ^1.2.2
   share_plus: ^12.0.2
+  flutter_launcher_icons: ^0.14.3
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -32,3 +33,10 @@ flutter:
     - family: Bahij
       fonts:
         - asset: assets/fonts/Bahij-Regular.ttf
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/icon.png"
+  min_sdk_android: 21
+  remove_alpha_ios: true        

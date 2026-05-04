@@ -9,6 +9,7 @@ class BaladiyatiHeader extends StatelessWidget {
   final String imagePath;
   final VoidCallback? onMenuTap;
   final VoidCallback? onBackTap;
+  final bool showBackButton;
 
   const BaladiyatiHeader({
     super.key,
@@ -16,6 +17,7 @@ class BaladiyatiHeader extends StatelessWidget {
     required this.imagePath,
     this.onMenuTap,
     this.onBackTap,
+    this.showBackButton = false,
   });
 
   @override
@@ -52,50 +54,57 @@ class BaladiyatiHeader extends StatelessWidget {
                   children: [
                     SizedBox(
                       width: 82.w,
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          InkWell(
-                            onTap:
-                                onBackTap ?? () => Navigator.of(context).pop(),
-                            borderRadius: BorderRadius.circular(8.r),
-                            child: Padding(
-                              padding: EdgeInsets.all(4.w),
-                              child: Icon(
-                                Icons.arrow_back_rounded,
-                                color: AppColors.white,
-                                size: 24.sp,
-                              ),
-                            ),
-                          ),
-
-                          SizedBox(width: 8.w),
-
-                          InkWell(
-                            onTap: onMenuTap,
-                            borderRadius: BorderRadius.circular(8.r),
-                            child: Padding(
-                              padding: EdgeInsets.all(4.w),
-                              child: SvgPicture.asset(
-                                'assets/images/menu.svg',
-                                width: 24.w,
-                                height: 24.h,
-                                colorFilter: const ColorFilter.mode(
-                                  Colors.white,
-                                  BlendMode.srcIn,
-                                ),
-                                errorBuilder: (_, __, ___) => Icon(
-                                  Icons.grid_view_rounded,
-                                  color: AppColors.white,
-                                  size: 24.sp,
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            if (showBackButton) ...[
+                              InkWell(
+                                onTap:
+                                    onBackTap ??
+                                    () {
+                                      if (Navigator.of(context).canPop()) {
+                                        Navigator.of(context).pop();
+                                      }
+                                    },
+                                borderRadius: BorderRadius.circular(8.r),
+                                child: Padding(
+                                  padding: EdgeInsets.all(4.w),
+                                  child: Icon(
+                                    Icons.arrow_back_rounded,
+                                    color: AppColors.white,
+                                    size: 24.sp,
+                                  ),
                                 ),
                               ),
+                              SizedBox(width: 8.w),
+                            ],
+                            InkWell(
+                              onTap: onMenuTap,
+                              borderRadius: BorderRadius.circular(8.r),
+                              child: Padding(
+                                padding: EdgeInsets.all(4.w),
+                                child: SvgPicture.asset(
+                                  'assets/images/menu.svg',
+                                  width: 24.w,
+                                  height: 24.h,
+                                  colorFilter: const ColorFilter.mode(
+                                    Colors.white,
+                                    BlendMode.srcIn,
+                                  ),
+                                  errorBuilder: (_, __, ___) => Icon(
+                                    Icons.grid_view_rounded,
+                                    color: AppColors.white,
+                                    size: 24.sp,
+                                  ),
+                                ),
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
-
                     Expanded(
                       child: Text(
                         title,
@@ -108,7 +117,6 @@ class BaladiyatiHeader extends StatelessWidget {
                         ),
                       ),
                     ),
-
                     SizedBox(width: 82.w),
                   ],
                 ),

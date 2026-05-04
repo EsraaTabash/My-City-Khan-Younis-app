@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 
-import 'prayer_time_model.dart';
+import 'package:flutter_application_1/features/adan_time/models/prayer_time_model.dart';
 
 class PrayerTimesApi {
   static const double khanYounisLat = 31.3462;

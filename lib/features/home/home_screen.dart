@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/features/account/screens/account_screen.dart';
 import 'package:flutter_application_1/features/account/screens/points_screen.dart';
 import 'package:flutter_application_1/features/ads/ads_screen.dart';
-import 'package:flutter_application_1/routes/app_routes.dart';
+import 'package:flutter_application_1/core/routes/app_routes.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_application_1/features/home/data/home_data.dart';
 import 'package:flutter_application_1/features/home/widgets/HomeTopCard.dart';

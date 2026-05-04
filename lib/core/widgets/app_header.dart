@@ -8,12 +8,14 @@ class AppHeader extends StatelessWidget {
   final String title;
   final VoidCallback? onBackTap;
   final VoidCallback? onMenuTap;
+  final bool showBackButton;
 
   const AppHeader({
     super.key,
     required this.title,
     this.onBackTap,
     this.onMenuTap,
+    this.showBackButton = false,
   });
 
   @override
@@ -29,7 +31,6 @@ class AppHeader extends StatelessWidget {
             fit: BoxFit.cover,
             errorBuilder: (_, __, ___) => Container(color: AppColors.primary),
           ),
-
           Container(
             decoration: BoxDecoration(
               gradient: LinearGradient(
@@ -42,57 +43,77 @@ class AppHeader extends StatelessWidget {
               ),
             ),
           ),
-
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 14.w),
-            child: Stack(
-              alignment: Alignment.center,
+            child: Row(
               children: [
-                Center(
-                  child: Text(
-                    title,
-                    textAlign: TextAlign.center,
-                    style: AppTextStyles.semiBold16.copyWith(
-                      color: Colors.white,
-                      fontSize: 18.sp,
-                    ),
-                  ),
-                ),
-
-                if (onBackTap != null || onMenuTap != null)
-                  Align(
-                    alignment: Alignment.centerRight,
+                SizedBox(
+                  width: 78.w,
+                  child: Align(
+                    alignment: Alignment.centerLeft,
                     child: Row(
-                      textDirection: TextDirection.rtl,
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        if (onBackTap != null)
+                        if (showBackButton)
                           InkWell(
-                            onTap: onBackTap,
-                            child: Icon(
-                              Icons.arrow_back_rounded,
-                              color: Colors.white,
-                              size: 24.sp,
+                            onTap:
+                                onBackTap ??
+                                () {
+                                  if (Navigator.of(context).canPop()) {
+                                    Navigator.of(context).pop();
+                                  }
+                                },
+                            borderRadius: BorderRadius.circular(8.r),
+                            child: Padding(
+                              padding: EdgeInsets.all(4.w),
+                              child: Icon(
+                                Icons.arrow_back_rounded,
+                                color: Colors.white,
+                                size: 24.sp,
+                              ),
                             ),
                           ),
-                        if (onMenuTap != null && onBackTap != null)
-                          SizedBox(width: 16.w),
+                        if (showBackButton && onMenuTap != null)
+                          SizedBox(width: 10.w),
                         if (onMenuTap != null)
                           InkWell(
                             onTap: onMenuTap,
-                            child: SvgPicture.asset(
-                              'assets/images/menu.svg',
-                              width: 24.w,
-                              height: 24.h,
-                              colorFilter: const ColorFilter.mode(
-                                Colors.white,
-                                BlendMode.srcIn,
+                            borderRadius: BorderRadius.circular(8.r),
+                            child: Padding(
+                              padding: EdgeInsets.all(4.w),
+                              child: SvgPicture.asset(
+                                'assets/images/menu.svg',
+                                width: 24.w,
+                                height: 24.h,
+                                colorFilter: const ColorFilter.mode(
+                                  Colors.white,
+                                  BlendMode.srcIn,
+                                ),
+                                placeholderBuilder: (_) => Icon(
+                                  Icons.grid_view_rounded,
+                                  color: Colors.white,
+                                  size: 24.sp,
+                                ),
                               ),
                             ),
                           ),
                       ],
                     ),
                   ),
+                ),
+                Expanded(
+                  child: Text(
+                    title,
+                    textAlign: TextAlign.center,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: AppTextStyles.semiBold16.copyWith(
+                      color: Colors.white,
+                      fontSize: 18.sp,
+                    ),
+                  ),
+                ),
+                SizedBox(width: 78.w),
               ],
             ),
           ),

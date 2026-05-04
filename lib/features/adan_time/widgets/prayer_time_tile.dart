@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/theme/app_text_styles.dart';
-import 'package:flutter_application_1/features/adan_time/data/prayer_time_model.dart';
+import 'package:flutter_application_1/features/adan_time/models/prayer_time_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class PrayerTimeTile extends StatelessWidget {

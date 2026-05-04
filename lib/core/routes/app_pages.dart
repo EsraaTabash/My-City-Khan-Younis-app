@@ -13,7 +13,7 @@ import 'package:flutter_application_1/features/splash/splash_screen.dart';
 import 'package:flutter_application_1/features/water_table/screens/water_table_screen.dart';
 import 'package:flutter_application_1/features/water_table/screens/water_table_detail_screen.dart';
 import 'package:flutter_application_1/features/weather/weather_screen.dart';
-import 'package:flutter_application_1/routes/app_routes.dart';
+import 'package:flutter_application_1/core/routes/app_routes.dart';
 
 class AppPages {
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {

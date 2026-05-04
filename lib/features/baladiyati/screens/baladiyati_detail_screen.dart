@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/features/baladiyati/widgets/baladiyati_header.dart';
-import 'package:flutter_application_1/features/menu/menu_screen.dart';
+import 'package:flutter_application_1/features/menu/screens/menu_screen.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_application_1/core/theme/app_text_styles.dart';
 import 'package:flutter_application_1/features/baladiyati/data/baladiyati_data.dart';
@@ -40,11 +40,10 @@ class _BaladiyatiDetailScreenState extends State<BaladiyatiDetailScreen> {
                 BaladiyatiHeader(
                   title: title,
                   imagePath: 'assets/images/login_bg.png',
-
+                  showBackButton: true,
                   onBackTap: () {
                     Navigator.of(context).pop();
                   },
-
                   onMenuTap: () {
                     _scaffoldKey.currentState?.openDrawer();
                   },

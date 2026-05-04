@@ -1,4 +1,4 @@
-import 'prayer_time_model.dart';
+import 'package:flutter_application_1/features/adan_time/models/prayer_time_model.dart';
 
 class PrayerTimesData {
   static PrayerTimeModel getNextPrayerForDate({

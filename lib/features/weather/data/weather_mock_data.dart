@@ -1,4 +1,4 @@
-import 'weather_model.dart';
+import 'package:flutter_application_1/features/weather/models/weather_model.dart';
 
 class WeatherMockData {
   static const WeatherModel currentWeather = WeatherModel(
@@ -10,7 +10,7 @@ class WeatherMockData {
     windPercentage: '40%',
     sunriseTime: '15 : 15',
     sunsetTime: '27 : 41',
-    weatherIconPath: 'assets/images/weather.svg',
+    weatherIconPath: 'assets/images/icon7.svg',
     cardBackgroundPath: 'assets/images/weather-bg2.png',
   );
 }

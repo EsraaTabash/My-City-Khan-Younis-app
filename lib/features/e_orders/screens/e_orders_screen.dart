@@ -4,7 +4,7 @@ import 'package:flutter_application_1/features/e_orders/data/e_orders_data.dart'
 import 'package:flutter_application_1/features/e_orders/widgets/e_orders_tab_bar.dart';
 import 'package:flutter_application_1/features/e_orders/widgets/my_orders_tab.dart';
 import 'package:flutter_application_1/features/e_orders/widgets/new_order_tab.dart';
-import 'package:flutter_application_1/features/menu/menu_screen.dart';
+import 'package:flutter_application_1/features/menu/screens/menu_screen.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class EOrdersScreen extends StatefulWidget {

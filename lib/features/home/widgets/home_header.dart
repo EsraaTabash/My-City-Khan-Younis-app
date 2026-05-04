@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/routes/app_routes.dart';
+import 'package:flutter_application_1/core/routes/app_navigation.dart';
+import 'package:flutter_application_1/core/routes/app_routes.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_application_1/core/theme/app_colors.dart';
 import 'package:flutter_application_1/core/theme/app_text_styles.dart';
@@ -47,32 +48,41 @@ class HomeHeader extends StatelessWidget {
                 SizedBox(height: 60.h),
                 Row(
                   children: [
-                    InkWell(
-                      onTap: onMenuPressed,
-                      borderRadius: BorderRadius.circular(8.r),
-                      child: Padding(
-                        padding: EdgeInsets.all(4.w),
-                        child: SvgPicture.asset(
-                          'assets/images/menu.svg',
-                          width: 24.w,
-                          height: 24.h,
-                          colorFilter: const ColorFilter.mode(
-                            Colors.white,
-                            BlendMode.srcIn,
+                    SizedBox(
+                      width: 78.w,
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: InkWell(
+                          onTap: onMenuPressed,
+                          borderRadius: BorderRadius.circular(8.r),
+                          child: Padding(
+                            padding: EdgeInsets.all(4.w),
+                            child: SvgPicture.asset(
+                              'assets/images/menu.svg',
+                              width: 24.w,
+                              height: 24.h,
+                              colorFilter: const ColorFilter.mode(
+                                Colors.white,
+                                BlendMode.srcIn,
+                              ),
+                            ),
                           ),
                         ),
                       ),
                     ),
-                    const Spacer(),
-                    Text(
-                      'مدينتي خان يونس',
-                      style: AppTextStyles.semiBold18.copyWith(
-                        color: AppColors.white,
-                        fontSize: 18.sp,
+                    Expanded(
+                      child: Text(
+                        'مدينتي خان يونس',
+                        textAlign: TextAlign.center,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: AppTextStyles.semiBold18.copyWith(
+                          color: AppColors.white,
+                          fontSize: 18.sp,
+                        ),
                       ),
                     ),
-                    const Spacer(),
-                    SizedBox(width: 24.w),
+                    SizedBox(width: 78.w),
                   ],
                 ),
                 SizedBox(height: 53.h),
@@ -106,11 +116,7 @@ class HomeHeader extends StatelessWidget {
                           const Spacer(),
                           TextButton.icon(
                             onPressed: () {
-                              Navigator.pushNamedAndRemoveUntil(
-                                context,
-                                AppRoutes.login,
-                                (route) => false,
-                              );
+                              AppNavigation.goToLogin(context);
                             },
                             style: TextButton.styleFrom(
                               padding: EdgeInsets.zero,

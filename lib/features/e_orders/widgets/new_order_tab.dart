@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/features/e_orders/model/order_category.dart';
+import 'package:flutter_application_1/features/e_orders/models/order_category.dart';
 import 'package:flutter_application_1/features/e_orders/widgets/order_category_card.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

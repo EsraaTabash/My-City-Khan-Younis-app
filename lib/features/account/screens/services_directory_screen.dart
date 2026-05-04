@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/features/account/data/account_mock_data.dart';
-import 'package:flutter_application_1/features/menu/menu_screen.dart';
+import 'package:flutter_application_1/features/menu/screens/menu_screen.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../core/widgets/app_header.dart';
+import 'package:flutter_application_1/core/widgets/app_header.dart';
 import '../widgets/service_tile.dart';
 
 class ServicesDirectoryScreen extends StatefulWidget {

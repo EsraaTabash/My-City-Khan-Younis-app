@@ -3,7 +3,7 @@ import 'package:flutter_application_1/features/account/data/account_mock_data.da
 import 'package:flutter_application_1/features/account/widgets/invoice_card.dart';
 import 'package:flutter_application_1/features/account/widgets/invoice_tab_bar.dart';
 import 'package:flutter_application_1/features/account/widgets/payment_card.dart';
-import '../../../../core/widgets/app_header.dart';
+import 'package:flutter_application_1/core/widgets/app_header.dart';
 
 class InvoicesScreen extends StatefulWidget {
   const InvoicesScreen({super.key});

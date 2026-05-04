@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/routes/app_pages.dart';
-import 'package:flutter_application_1/routes/app_routes.dart';
+import 'package:flutter_application_1/core/routes/app_router.dart';
+import 'package:flutter_application_1/core/routes/app_routes.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 void main() {
@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           initialRoute: AppRoutes.splash,
-          onGenerateRoute: AppPages.onGenerateRoute,
+          onGenerateRoute: AppRouter.onGenerateRoute,
         );
       },
     );

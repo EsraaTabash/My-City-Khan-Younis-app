@@ -4,7 +4,7 @@ import 'package:flutter_application_1/features/account/widgets/app_dropdown_box.
 import 'package:flutter_application_1/features/account/widgets/app_input_box.dart';
 import 'package:flutter_application_1/features/account/widgets/info_tile.dart';
 import 'package:flutter_application_1/features/account/widgets/section_title.dart';
-import 'package:flutter_application_1/features/menu/menu_screen.dart';
+import 'package:flutter_application_1/features/menu/screens/menu_screen.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class PointsScreen extends StatefulWidget {

@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/theme/app_colors.dart';
 import 'package:flutter_application_1/features/discover/models/discover_place.dart';
-import 'package:flutter_application_1/features/discover/place_details_screen.dart';
+import 'package:flutter_application_1/core/routes/app_navigation.dart';
+import 'package:flutter_application_1/core/routes/app_routes.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:latlong2/latlong.dart';
 
-import '../models/discover_places_data.dart';
+import 'package:flutter_application_1/features/discover/data/discover_places_data.dart';
 import 'place_details_bottom_sheet.dart';
 
 class MapContent extends StatelessWidget {
@@ -55,13 +56,11 @@ class MapContent extends StatelessWidget {
                     );
                     if (selectedPlace == null) return;
 
-                    final returnedPlace = await Navigator.of(context)
-                        .push<DiscoverPlace>(
-                          MaterialPageRoute(
-                            builder: (_) =>
-                                PlaceDetailsScreen(place: selectedPlace),
-                          ),
-                        );
+                    final returnedPlace = await AppNavigation.push<DiscoverPlace>(
+                      context,
+                      AppRoutes.placeDetails,
+                      arguments: selectedPlace,
+                    );
 
                     if (returnedPlace != null) {
                       mapController.move(returnedPlace.location, 16);

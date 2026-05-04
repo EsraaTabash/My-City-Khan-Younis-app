@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/theme/app_text_styles.dart';
-import 'package:flutter_application_1/features/weather/data/weather_model.dart';
+import 'package:flutter_application_1/features/weather/models/weather_model.dart';
 import 'package:flutter_application_1/features/weather/widgets/weather_metric_item.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';

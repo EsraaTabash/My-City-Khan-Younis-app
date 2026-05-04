@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/features/contact_us/data/contact_models.dart';
+import 'package:flutter_application_1/features/contact_us/models/contact_models.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_application_1/core/theme/app_text_styles.dart';
 import 'package:flutter_svg/flutter_svg.dart';

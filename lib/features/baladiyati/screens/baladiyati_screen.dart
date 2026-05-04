@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/features/baladiyati/screens/baladiyati_detail_screen.dart';
-import 'package:flutter_application_1/features/baladiyati/screens/baladiyati_news_screen.dart';
+import 'package:flutter_application_1/core/routes/app_navigation.dart';
+import 'package:flutter_application_1/core/routes/app_routes.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_application_1/core/theme/app_text_styles.dart';
 import 'package:flutter_application_1/features/baladiyati/data/baladiyati_data.dart';
@@ -15,19 +15,15 @@ class BaladiyatiScreen extends StatelessWidget {
 
   const BaladiyatiScreen({super.key, this.onMenuTap});
   void _openDetail(BuildContext context, BaladiyatiSection section) {
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (_) => BaladiyatiDetailScreen(
-          type: BaladiyatiData.typeFromSection(section),
-        ),
-      ),
+    AppNavigation.push(
+      context,
+      AppRoutes.baladiyatiDetail,
+      arguments: BaladiyatiData.typeFromSection(section),
     );
   }
 
   void _openNews(BuildContext context) {
-    Navigator.of(
-      context,
-    ).push(MaterialPageRoute(builder: (_) => const BaladiyatiNewsScreen()));
+    AppNavigation.push(context, AppRoutes.baladiyatiNews);
   }
 
   Widget _dots() {

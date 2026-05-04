@@ -1,4 +1,4 @@
-import 'contact_models.dart';
+import 'package:flutter_application_1/features/contact_us/models/contact_models.dart';
 
 const contactMessagesMockData = [
   ContactMessageItem(

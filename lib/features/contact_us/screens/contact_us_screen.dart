@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/core/routes/app_navigation.dart';
 import 'package:flutter_application_1/core/widgets/app_header.dart';
 import 'package:flutter_application_1/features/contact_us/widgets/supervisors_map_view.dart';
-import 'package:flutter_application_1/routes/app_routes.dart';
+import 'package:flutter_application_1/features/menu/screens/menu_screen.dart';
+import 'package:flutter_application_1/core/routes/app_routes.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import '../data/contact_mock_data.dart';
@@ -17,6 +19,7 @@ class ContactUsScreen extends StatefulWidget {
 }
 
 class _ContactUsScreenState extends State<ContactUsScreen> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   int selectedIndex = 0;
   late final PageController _pageController;
 
@@ -32,6 +35,10 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
   void dispose() {
     _pageController.dispose();
     super.dispose();
+  }
+
+  void _openMenu() {
+    _scaffoldKey.currentState?.openDrawer();
   }
 
   void _changeTab(int index) {
@@ -51,6 +58,8 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
+        key: _scaffoldKey,
+        drawer: SizedBox(width: 300.w, child: const MenuScreen()),
         backgroundColor: const Color(0xFFF4F4F4),
         body: SafeArea(
           bottom: false,
@@ -60,6 +69,7 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
               AppHeader(
                 title: 'تواصل معنا',
                 onBackTap: () => Navigator.pop(context),
+                onMenuTap: _openMenu,
               ),
 
               ContactTabBar(
@@ -119,7 +129,7 @@ class _MessagesView extends StatelessWidget {
               height: 45.h,
               child: ElevatedButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, AppRoutes.newMessage);
+                  AppNavigation.push(context, AppRoutes.newMessage);
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF079BEE),

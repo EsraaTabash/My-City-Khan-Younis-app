@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/core/routes/app_navigation.dart';
 import 'package:flutter_application_1/core/widgets/AppCard.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_application_1/core/theme/app_colors.dart';
 import 'package:flutter_application_1/core/theme/app_text_styles.dart';
-import 'package:flutter_application_1/routes/app_routes.dart';
+import 'package:flutter_application_1/core/routes/app_routes.dart';
 
 class QuickAccessSection extends StatelessWidget {
   final bool insideParentCard;
@@ -34,7 +35,7 @@ class QuickAccessSection extends StatelessWidget {
             Expanded(
               child: GestureDetector(
                 onTap: () {
-                  Navigator.pushNamed(context, AppRoutes.waterTable);
+                  AppNavigation.push(context, AppRoutes.waterTable);
                 },
                 child: _QuickCard(
                   title: 'جدول المياه',
@@ -49,7 +50,7 @@ class QuickAccessSection extends StatelessWidget {
             Expanded(
               child: GestureDetector(
                 onTap: () {
-                  Navigator.pushNamed(context, AppRoutes.newMessage);
+                  AppNavigation.push(context, AppRoutes.newMessage);
                 },
                 child: _QuickCard(
                   title: 'شكاوى واقتراحات',

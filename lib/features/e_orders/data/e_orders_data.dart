@@ -1,5 +1,5 @@
-import 'package:flutter_application_1/features/e_orders/model/my_order_item.dart';
-import 'package:flutter_application_1/features/e_orders/model/order_category.dart';
+import 'package:flutter_application_1/features/e_orders/models/my_order_item.dart';
+import 'package:flutter_application_1/features/e_orders/models/order_category.dart';
 
 class EOrdersData {
   static const List<OrderCategory> categories = [

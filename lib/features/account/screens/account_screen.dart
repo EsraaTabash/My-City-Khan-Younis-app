@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/features/account/screens/invoices_screen.dart';
+import 'package:flutter_application_1/core/routes/app_navigation.dart';
+import 'package:flutter_application_1/core/routes/app_routes.dart';
 import 'package:flutter_application_1/features/account/widgets/large_wallet_card.dart';
 import 'package:flutter_application_1/features/account/widgets/wallet_card.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../../core/widgets/app_header.dart';
+import 'package:flutter_application_1/core/widgets/app_header.dart';
 import '../widgets/user_info_card.dart';
 import '../widgets/quick_card.dart';
 
@@ -22,11 +23,7 @@ class AccountScreen extends StatelessWidget {
           physics: const BouncingScrollPhysics(),
           child: Column(
             children: [
-              AppHeader(
-                title: 'الحساب',
-                onBackTap: () {},
-                onMenuTap: onMenuTap,
-              ),
+              AppHeader(title: 'الحساب', onMenuTap: onMenuTap),
 
               const UserInfoCard(),
 
@@ -58,12 +55,7 @@ class AccountScreen extends StatelessWidget {
                             titleColor: const Color(0xFF4F596B),
                             valueColor: const Color(0xFF079BEE),
                             onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (_) => const InvoicesScreen(),
-                                ),
-                              );
+                              AppNavigation.push(context, AppRoutes.invoices);
                             },
                           ),
                         ),

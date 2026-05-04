@@ -1,4 +1,4 @@
-import 'account_models.dart';
+import 'package:flutter_application_1/features/account/models/account_models.dart';
 
 const invoicesMockData = [
   InvoiceItem(
