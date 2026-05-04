@@ -47,12 +47,17 @@ class QuickAccessSection extends StatelessWidget {
             ),
             SizedBox(width: 6.w),
             Expanded(
-              child: _QuickCard(
-                title: 'شكاوى واقتراحات',
-                subtitle: 'رسائل ومقترحين',
-                imagePath: 'assets/images/chat.png',
-                color: const Color(0xFFD91B8A),
-                iconPosition: QuickCardIconPosition.bottom,
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.pushNamed(context, AppRoutes.newMessage);
+                },
+                child: _QuickCard(
+                  title: 'شكاوى واقتراحات',
+                  subtitle: 'رسائل ومقترحين',
+                  imagePath: 'assets/images/chat.png',
+                  color: const Color(0xFFD91B8A),
+                  iconPosition: QuickCardIconPosition.bottom,
+                ),
               ),
             ),
           ],

@@ -20,19 +20,20 @@ class NewsItem {
 
 class NewsSection extends StatelessWidget {
   final List<NewsItem> items;
+  final VoidCallback? onTap;
 
-  const NewsSection({super.key, required this.items});
+  const NewsSection({super.key, required this.items, this.onTap});
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const _SectionHeader(title: 'آخر الأخبار'),
+        _SectionHeader(title: 'آخر الأخبار', onTap: onTap),
         SizedBox(height: 8.h),
         ...items.map(
           (item) => Padding(
             padding: EdgeInsets.only(bottom: 12.h),
-            child: _NewsCard(item: item),
+            child: _NewsCard(item: item, onTap: onTap),
           ),
         ),
       ],
@@ -42,45 +43,55 @@ class NewsSection extends StatelessWidget {
 
 class _SectionHeader extends StatelessWidget {
   final String title;
+  final VoidCallback? onTap;
 
-  const _SectionHeader({required this.title});
+  const _SectionHeader({required this.title, this.onTap});
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Text(
-          title,
-          style: AppTextStyles.regular16.copyWith(
-            fontSize: 16.sp,
-            color: const Color(0xFF2F3654),
-          ),
-        ),
-        const Spacer(),
-
-        Row(
-          children: List.generate(
-            5,
-            (index) => Container(
-              margin: EdgeInsets.only(left: 6.w),
-              width: 8.w,
-              height: 8.w,
-              decoration: BoxDecoration(
-                color: index == 0 ? const Color(0xFF2F3654) : AppColors.primary,
-                shape: BoxShape.circle,
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(6.r),
+      child: Padding(
+        padding: EdgeInsets.symmetric(vertical: 4.h),
+        child: Row(
+          children: [
+            Text(
+              title,
+              style: AppTextStyles.regular16.copyWith(
+                fontSize: 16.sp,
+                color: const Color(0xFF2F3654),
               ),
             ),
-          ),
+            const Spacer(),
+            Row(
+              children: List.generate(
+                5,
+                (index) => Container(
+                  margin: EdgeInsets.only(left: 6.w),
+                  width: 8.w,
+                  height: 8.w,
+                  decoration: BoxDecoration(
+                    color: index == 0
+                        ? const Color(0xFF2F3654)
+                        : AppColors.primary,
+                    shape: BoxShape.circle,
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
-      ],
+      ),
     );
   }
 }
 
 class _NewsCard extends StatelessWidget {
   final NewsItem item;
+  final VoidCallback? onTap;
 
-  const _NewsCard({required this.item});
+  const _NewsCard({required this.item, this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -89,54 +100,57 @@ class _NewsCard extends StatelessWidget {
       margin: EdgeInsets.zero,
       padding: EdgeInsets.zero,
       borderRadius: 8.r,
-      child: Container(
-        decoration: BoxDecoration(
-          color: AppColors.white,
-          borderRadius: BorderRadius.circular(8.r),
-          border: Border.all(color: const Color(0xFFE6E6E6)),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            ClipRRect(
-              borderRadius: BorderRadius.vertical(top: Radius.circular(8.r)),
-              child: Image.asset(
-                item.imagePath,
-                height: 155.h,
-                width: double.infinity,
-                fit: BoxFit.cover,
-                errorBuilder: (_, __, ___) => Container(
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(8.r),
+        child: Container(
+          decoration: BoxDecoration(
+            color: AppColors.white,
+            borderRadius: BorderRadius.circular(8.r),
+            border: Border.all(color: const Color(0xFFE6E6E6)),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.vertical(top: Radius.circular(8.r)),
+                child: Image.asset(
+                  item.imagePath,
                   height: 155.h,
-                  color: const Color(0xFFEAEAEA),
-                  alignment: Alignment.center,
-                  child: const Icon(Icons.image_not_supported_outlined),
+                  width: double.infinity,
+                  fit: BoxFit.cover,
+                  errorBuilder: (_, __, ___) => Container(
+                    height: 155.h,
+                    color: const Color(0xFFEAEAEA),
+                    alignment: Alignment.center,
+                    child: const Icon(Icons.image_not_supported_outlined),
+                  ),
                 ),
               ),
-            ),
-            SizedBox(height: 9.h),
-
-            Padding(
-              padding: EdgeInsets.fromLTRB(12.w, 10.h, 12.w, 12.h),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  _TitleAndDate(item: item),
-                  SizedBox(height: 15.h),
-                  Text(
-                    item.description,
-                    textAlign: TextAlign.right,
-                    maxLines: 3,
-                    overflow: TextOverflow.ellipsis,
-                    style: AppTextStyles.regular14.copyWith(
-                      fontSize: 10.sp,
-                      color: const Color(0xFF8F8F8F),
-                      height: 1.4,
+              SizedBox(height: 9.h),
+              Padding(
+                padding: EdgeInsets.fromLTRB(12.w, 10.h, 12.w, 12.h),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    _TitleAndDate(item: item),
+                    SizedBox(height: 15.h),
+                    Text(
+                      item.description,
+                      textAlign: TextAlign.right,
+                      maxLines: 3,
+                      overflow: TextOverflow.ellipsis,
+                      style: AppTextStyles.regular14.copyWith(
+                        fontSize: 10.sp,
+                        color: const Color(0xFF8F8F8F),
+                        height: 1.4,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
@@ -168,9 +182,7 @@ class _TitleAndDate extends StatelessWidget {
             style: titleStyle,
           ),
         ),
-
         SizedBox(width: 8.w),
-
         Padding(
           padding: EdgeInsets.only(bottom: 2.h),
           child: Text(

@@ -7,8 +7,14 @@ import 'package:flutter_application_1/features/home/widgets/quick_access_section
 class HomeTopCard extends StatelessWidget {
   final bool isGuest;
   final List<HomeStatItem> stats;
+  final VoidCallback? onPointsTap;
 
-  const HomeTopCard({super.key, required this.isGuest, required this.stats});
+  const HomeTopCard({
+    super.key,
+    required this.isGuest,
+    required this.stats,
+    this.onPointsTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +25,11 @@ class HomeTopCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           if (!isGuest) ...[
-            HomeStatsSection(items: stats, showPoints: true),
+            HomeStatsSection(
+              items: stats,
+              showPoints: true,
+              onPointsTap: onPointsTap,
+            ),
             SizedBox(height: 14.h),
           ],
           const QuickAccessSection(insideParentCard: true),

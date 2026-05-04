@@ -3,8 +3,6 @@ import 'package:flutter_application_1/core/theme/app_colors.dart';
 import 'package:flutter_application_1/core/theme/app_text_styles.dart';
 import 'package:flutter_application_1/core/widgets/primary_button.dart';
 import 'package:flutter_application_1/core/widgets/secondary_button.dart';
-import 'package:flutter_application_1/features/auth/login_screen.dart';
-import 'package:flutter_application_1/features/home/home_screen.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SplashScreen extends StatelessWidget {

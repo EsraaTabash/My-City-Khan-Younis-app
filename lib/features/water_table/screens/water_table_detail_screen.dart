@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/core/theme/app_colors.dart';
-import 'package:flutter_application_1/core/theme/app_text_styles.dart';
+
 import 'package:flutter_application_1/features/water_table/widgets/index.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class WaterTableDetailScreen extends StatefulWidget {
   final Map<String, dynamic> region;

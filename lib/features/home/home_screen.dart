@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/features/account/account_screen.dart';
+import 'package:flutter_application_1/features/account/screens/account_screen.dart';
+import 'package:flutter_application_1/features/account/screens/points_screen.dart';
 import 'package:flutter_application_1/features/ads/ads_screen.dart';
+import 'package:flutter_application_1/routes/app_routes.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_application_1/features/home/data/home_data.dart';
 import 'package:flutter_application_1/features/home/widgets/HomeTopCard.dart';
@@ -42,11 +44,38 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  HomeTopCard(isGuest: widget.isGuest, stats: HomeData.stats),
+                  HomeTopCard(
+                    isGuest: widget.isGuest,
+                    stats: HomeData.stats,
+                    onPointsTap: widget.isGuest
+                        ? null
+                        : () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => const PointsScreen(),
+                              ),
+                            );
+                          },
+                  ),
                   SizedBox(height: 26.h),
-                  NewsSection(items: HomeData.news),
+                  NewsSection(
+                    items: HomeData.news,
+                    onTap: () {
+                      Navigator.pushNamed(context, AppRoutes.baladiyatiNews);
+                    },
+                  ),
+
                   SizedBox(height: 20.h),
-                  AdsSection(items: HomeData.ads),
+
+                  AdsSection(
+                    items: HomeData.ads,
+                    onTap: () {
+                      setState(() {
+                        _selectedIndex = 2;
+                      });
+                    },
+                  ),
                 ],
               ),
             ),
@@ -102,20 +131,22 @@ class _HomeScreenState extends State<HomeScreen> {
         key: _scaffoldKey,
         backgroundColor: const Color(0xFFF3F5F8),
         drawer: const SizedBox(width: 300, child: MenuScreen()),
-        body: SafeArea(
-          bottom: false,
-          child: Column(
-            children: [
-              Expanded(child: _buildCurrentPage()),
-              HomeBottomNavBar(
-                currentIndex: _selectedIndex,
-                onTap: (index) {
-                  setState(() {
-                    _selectedIndex = index;
-                  });
-                },
-              ),
-            ],
+        body: SizedBox.expand(
+          child: SafeArea(
+            bottom: false,
+            child: Column(
+              children: [
+                Expanded(child: _buildCurrentPage()),
+                HomeBottomNavBar(
+                  currentIndex: _selectedIndex,
+                  onTap: (index) {
+                    setState(() {
+                      _selectedIndex = index;
+                    });
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       ),

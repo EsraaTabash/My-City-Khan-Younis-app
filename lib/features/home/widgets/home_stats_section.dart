@@ -13,11 +13,13 @@ class HomeStatItem {
 class HomeStatsSection extends StatelessWidget {
   final List<HomeStatItem> items;
   final bool showPoints;
+  final VoidCallback? onPointsTap;
 
   const HomeStatsSection({
     super.key,
     required this.items,
     this.showPoints = true,
+    this.onPointsTap,
   });
 
   @override
@@ -28,36 +30,46 @@ class HomeStatsSection extends StatelessWidget {
 
     return Row(
       children: visibleItems.map((item) {
+        final bool isPointsCard = item.title == 'نقاطي';
+
         return Expanded(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 4.w),
-            child: Container(
-              height: 76.h,
-              decoration: BoxDecoration(
-                color: const Color(0xFFF4F6F6),
+            child: Material(
+              color: const Color(0xFFF4F6F6),
+              borderRadius: BorderRadius.circular(6.r),
+              child: InkWell(
+                onTap: isPointsCard ? onPointsTap : null,
                 borderRadius: BorderRadius.circular(6.r),
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    item.title,
-                    style: AppTextStyles.regular16.copyWith(
-                      fontSize: 14.sp,
-                      color: const Color(0xFF555555),
-                    ),
-                    textAlign: TextAlign.center,
+                child: Container(
+                  height: 76.h,
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFF4F6F6),
+                    borderRadius: BorderRadius.circular(6.r),
                   ),
-                  SizedBox(height: 1.h),
-                  Text(
-                    item.value,
-                    style: AppTextStyles.bold14.copyWith(
-                      fontSize: 16.sp,
-                      color: AppColors.primary,
-                    ),
-                    textAlign: TextAlign.center,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        item.title,
+                        style: AppTextStyles.regular16.copyWith(
+                          fontSize: 14.sp,
+                          color: const Color(0xFF555555),
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                      SizedBox(height: 1.h),
+                      Text(
+                        item.value,
+                        style: AppTextStyles.bold14.copyWith(
+                          fontSize: 16.sp,
+                          color: AppColors.primary,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
                   ),
-                ],
+                ),
               ),
             ),
           ),

@@ -4,9 +4,20 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_application_1/core/theme/app_colors.dart';
 import 'package:flutter_application_1/core/theme/app_text_styles.dart';
 import 'package:flutter_application_1/features/menu/widgets/menu_item_tile.dart';
+import 'package:share_plus/share_plus.dart';
 
 class MenuScreen extends StatelessWidget {
   const MenuScreen({super.key});
+
+  void _shareApp() {
+    SharePlus.instance.share(
+      ShareParams(
+        subject: 'تطبيق بلدية خانيونس',
+        text:
+            'حمّل تطبيق بلدية خانيونس وتابع الأخبار والخدمات ومواعيد المياه والطقس والعملات.\n\nرابط التطبيق:\nhttps://example.com/app',
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -14,12 +25,12 @@ class MenuScreen extends StatelessWidget {
       const _MenuItemData(
         title: 'الأخبار',
         iconPath: 'assets/images/icon1.svg',
-        //route: AppRoutes.news,
+        route: AppRoutes.baladiyatiNews,
       ),
       const _MenuItemData(
         title: 'دليل الخدمات',
         iconPath: 'assets/images/icon2.svg',
-        //route: AppRoutes.servicesGuide,
+        route: AppRoutes.servicesDirectory,
       ),
       const _MenuItemData(
         title: 'طلباتي',
@@ -31,51 +42,48 @@ class MenuScreen extends StatelessWidget {
         title: 'الوظائف',
         iconPath: 'assets/images/icon4.svg',
         badgeCount: 3,
-        //route: AppRoutes.jobs,
       ),
       const _MenuItemData(
         title: 'العملات',
         iconPath: 'assets/images/icon5.svg',
-        //route: AppRoutes.currency,
+        route: AppRoutes.currency,
       ),
       const _MenuItemData(
         title: 'مواقيت الصلاة',
         iconPath: 'assets/images/icon6.svg',
-        //route: AppRoutes.prayerTimes,
+        route: AppRoutes.adanTime,
       ),
       const _MenuItemData(
         title: 'حالة الطقس',
         iconPath: 'assets/images/icon7.svg',
-        //route: AppRoutes.weather,
+        route: AppRoutes.weather,
       ),
       const _MenuItemData(
         title: 'تواصل معنا',
         iconPath: 'assets/images/icon8.svg',
-        //route: AppRoutes.contactUs,
+        route: AppRoutes.contactUs,
       ),
       const _MenuItemData(
         title: 'عن التطبيق',
         iconPath: 'assets/images/icon9.svg',
-        //route: AppRoutes.aboutApp,
       ),
       const _MenuItemData(
         title: 'مشاركة التطبيق',
         iconPath: 'assets/images/icon10.svg',
-        //route: AppRoutes.shareApp,
+        action: MenuAction.shareApp,
       ),
       const _MenuItemData(
         title: 'سياسة الاستخدام',
         iconPath: 'assets/images/icon11.svg',
-        //route: AppRoutes.usagePolicy,
       ),
     ];
+
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
         backgroundColor: AppColors.white,
         body: Column(
           children: [
-            /// 🔹 HEADER
             Container(
               height: 109.h,
               width: double.infinity,
@@ -83,7 +91,6 @@ class MenuScreen extends StatelessWidget {
                 fit: StackFit.expand,
                 children: [
                   Image.asset('assets/images/header_bg.png', fit: BoxFit.cover),
-
                   Container(
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
@@ -96,7 +103,6 @@ class MenuScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-
                   Padding(
                     padding: EdgeInsets.only(
                       top: 34.h,
@@ -133,7 +139,6 @@ class MenuScreen extends StatelessWidget {
               ),
             ),
 
-            /// 🔹 LIST
             Expanded(
               child: ListView.separated(
                 padding: EdgeInsets.zero,
@@ -147,6 +152,7 @@ class MenuScreen extends StatelessWidget {
                 ),
                 itemBuilder: (context, index) {
                   final item = menuItems[index];
+
                   return MenuItemTile(
                     title: item.title,
                     iconPath: item.iconPath,
@@ -155,6 +161,14 @@ class MenuScreen extends StatelessWidget {
                       final navigator = Navigator.of(context);
 
                       navigator.pop();
+
+                      if (item.action == MenuAction.shareApp) {
+                        Future.delayed(
+                          const Duration(milliseconds: 200),
+                          _shareApp,
+                        );
+                        return;
+                      }
 
                       if (item.route != null) {
                         Future.delayed(const Duration(milliseconds: 200), () {
@@ -173,16 +187,20 @@ class MenuScreen extends StatelessWidget {
   }
 }
 
+enum MenuAction { shareApp }
+
 class _MenuItemData {
   final String title;
   final String iconPath;
   final int? badgeCount;
   final String? route;
+  final MenuAction? action;
 
   const _MenuItemData({
     required this.title,
     required this.iconPath,
     this.badgeCount,
     this.route,
+    this.action,
   });
 }

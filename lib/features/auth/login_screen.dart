@@ -6,7 +6,6 @@ import 'package:flutter_application_1/core/theme/app_text_styles.dart';
 import 'package:flutter_application_1/core/widgets/custom_text_field.dart';
 import 'package:flutter_application_1/core/widgets/primary_button.dart';
 import 'package:flutter_application_1/core/utils/validators.dart';
-import 'package:flutter_application_1/features/home/home_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});

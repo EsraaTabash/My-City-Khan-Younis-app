@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 enum BaladiyatiSection { khanYounis, departments, history }
 
 enum BaladiyatiDetailType { city, history, departments }

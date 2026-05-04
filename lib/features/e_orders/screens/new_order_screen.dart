@@ -1,18 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/widgets/app_header.dart';
+import 'package:flutter_application_1/features/menu/menu_screen.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_application_1/core/theme/app_colors.dart';
 import 'package:flutter_application_1/core/theme/app_text_styles.dart';
 
-class NewOrderScreen extends StatelessWidget {
+class NewOrderScreen extends StatefulWidget {
   const NewOrderScreen({super.key});
+
+  @override
+  State<NewOrderScreen> createState() => _NewOrderScreenState();
+}
+
+class _NewOrderScreenState extends State<NewOrderScreen> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
+  void _openMenu() {
+    _scaffoldKey.currentState?.openDrawer();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
+        key: _scaffoldKey,
         backgroundColor: const Color(0xFFF3F5F8),
+        drawer: SizedBox(width: 300.w, child: const MenuScreen()),
         body: SafeArea(
           bottom: false,
           child: Column(
@@ -20,6 +34,7 @@ class NewOrderScreen extends StatelessWidget {
               AppHeader(
                 title: 'طلب جديد',
                 onBackTap: () => Navigator.of(context).pop(),
+                onMenuTap: _openMenu,
               ),
 
               Container(
@@ -114,6 +129,7 @@ class NewOrderScreen extends StatelessWidget {
                                 ),
                               ],
                             ),
+
                             SizedBox(height: 8.h),
 
                             Align(
@@ -149,10 +165,11 @@ class NewOrderScreen extends StatelessWidget {
                                 color: AppColors.primary,
                                 borderRadius: BorderRadius.circular(3.r),
                                 image: const DecorationImage(
-                                  image: AssetImage("assets/images/Folder.png"),
+                                  image: AssetImage('assets/images/Folder.png'),
                                 ),
                               ),
                             ),
+
                             SizedBox(width: 15.w),
 
                             Expanded(
@@ -246,11 +263,13 @@ class NewOrderScreen extends StatelessWidget {
                         ),
                       ),
                     ),
+
                     Container(
                       height: 36.h,
                       width: 1.w,
                       color: const Color(0xFFD7D7D7),
                     ),
+
                     Expanded(
                       child: Text.rich(
                         TextSpan(
